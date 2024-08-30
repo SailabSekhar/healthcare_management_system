@@ -1,0 +1,33 @@
+{% include 'aheader.html' %}
+
+<h2>Edit User</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Signup Information</h3>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ signup.name }}">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ signup.email }}" readonly>
+    
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile" name="mobile" value="{{ signup.mobile }}">
+    
+    <label for="role_name">Role Name:</label>
+    <input type="text" id="role_name" name="role_name" value="{{ signup.role_name }}">
+    
+    <h3>Profile Information</h3>
+    {% for profile in profiles %}
+        <label for="fname_{{ forloop.counter0 }}">First Name:</label>
+        <input type="text" id="fname_{{ forloop.counter0 }}" name="fname_{{ forloop.counter0 }}" value="{{ profile.fname }}">
+        
+        <label for="lname_{{ forloop.counter0 }}">Last Name:</label>
+        <input type="text" id="lname_{{ forloop.counter0 }}" name="lname_{{ forloop.counter0 }}" value="{{ profile.lname }}">
+        
+        <label for="address_{{ forloop.counter0 }}">Address:</label>
+        <input type="text" id="address_{{ forloop.counter0 }}" name="address_{{ forloop.counter0 }}" value="{{ profile.address }}">
+    {% endfor %}
+    
+    <input type="submit" value="Save Changes" class="btn btn-primary">
+</form>

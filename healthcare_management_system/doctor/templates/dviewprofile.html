@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    <title>Profile View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: #77aaff 3px solid;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .profile-card, .info-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        .profile-card img {
+            border-radius: 50%;
+            height: 300px;
+            width: 200px;
+            object-fit: cover;
+        }
+        .profile-card h2 {
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+        .profile-card p, .info-card p {
+            margin: 10px 0;
+        }
+        .info-card a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+        .profile-card, .info-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .profile-card li, .info-card li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'dheader.html'%}
+    <div class="container">
+        {% if error %}
+            <p>{{ error }}</p>
+        {% else %}
+            <div class="profile-card">
+                <h2>User Profile</h2>
+                {% if data and data|length > 0 %}
+                    <ul>
+                        {% for item in data %}
+                        
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="Profile Image">
+                                {% else %}
+                                    <p>No image available</p>
+                                {% endif %}
+                                <p><strong>Name:</strong> {{ item.fname |title}} {{ item.lname |title}}</p>
+                              
+                                
+                                {% if item.document %}
+                                    <p><a href="{{ item.document.url }}">Download Document</a></p>
+                                {% else %}
+                                    <p>No document available</p>
+                                {% endif %}
+                           
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No profile data available.</p>
+                {% endif %}
+            </div>
+
+            <div class="info-card">
+                <h2>Contact Information</h2>
+                <p><strong>Email:</strong> {{ data1.email }}</p>
+                <p><strong>Mobile:</strong> {{ data1.mobile }}</p>
+                {% for item in data %}
+                <p><strong>Address:</strong> {{ item.address }}</p>
+                {% endfor %}
+                <button class="btn btn-primary"> <a style="text-decoration:None; color: rgb(246, 243, 243);"  href="{% url 'profile_page'%}">Edit Profile</a></button>
+                
+              
+            </div>
+        {% endif %}
+        
+    </div>
+</body>
+</html>

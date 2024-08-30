@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>View Documents</title>
+</head>
+<body>
+ <h1>Uploaded Documents</h1>
+<table border="solid">
+ <tr>
+ <th> fname</th>
+ <th> lname</th>
+ <th> image</th>
+ <th> resume</th>
+ <th>address</th>
+ </tr>
+ {% for user in data %}
+ <tr>
+ <td>{{user.fname}} </td>
+ <td>{{user.lname}} </td>
+ <td><img src="{{user.image.url}}" height="50px" width="50px"></td>
+ <td><a href="{{user.document.url}}">download</a></td>
+ <td>{{user.address}}</td>
+ </tr>
+ {% endfor %} 
+</table>
+</body>
+</html

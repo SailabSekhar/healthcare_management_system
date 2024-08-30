@@ -1,0 +1,44 @@
+{% include 'aheader.html' %}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Role Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in data %}
+            <form method="post">
+                {% csrf_token %}
+                <tr>
+                    <td>{{ entry.signup.name }}</td>
+                    <td>{{ entry.signup.email }}</td>
+                    <td>{{ entry.signup.mobile }}</td>
+                    <td>{{ entry.signup.role_name }}</td>
+                    {% if entry.profile %}
+                        {% for profile in entry.profile %}
+                            <td>{{ profile.fname }}</td>
+                            <td>{{ profile.lname }}</td>
+                            <td>{{ profile.address }}</td>
+                            <td><img src="{{profile.image.url}}"  height="100px" width="100px"></td>
+                        {% endfor %}
+                    {% else %}
+                        <td colspan="3">No Profile Data</td>
+                    {% endif %}
+                    <td>
+                        <input type="email" name="email" value="{{ entry.signup.email }}" hidden>
+                        <!-- <input type="submit" value="edit" name="btn" class="btn btn-warning"> -->
+                        <input type="submit" value="delete" name="btn" class="btn btn-danger">
+                    </td>
+                </tr>
+            </form>
+        {% endfor %}
+    </tbody>
+</table>

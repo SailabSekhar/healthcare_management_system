@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<style>
+    .signup-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    .signup-form input[type="text"],
+    .signup-form input[type="email"],
+    .signup-form input[type="password"],
+    .signup-form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .signup-form input[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    .signup-form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    .signup-form h2 {
+        margin-bottom: 20px;
+    }
+</style>
+<div class="signup-form">
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="mobile">Mobile</label><br>
+        <input type="text" id="mobile" name="mobile" required><br>
+        
+        <label for="pwd">Password</label><br>
+        <input type="password" id="pwd" name="pwd" required><br>
+        
+        <label for="role_name">Role</label><br>
+        <select id="role_name" name="role_name" required>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+            <option value="admin">Admin</option>
+        </select><br>
+        
+        <input type="submit" value="Sign Up" name="btn">
+    </form>
+    <div>{{ output }}</div>
+</div>
+
+{% endblock %}

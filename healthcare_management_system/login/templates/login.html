@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="login-form">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="pwd">Password</label><br>
+        <input type="password" id="pwd" name="pwd" required><br>
+
+        <input type="submit" value="Login" name="btn">
+    </form>
+    <div>{{ data }}</div>
+</div>
+
+
+{% endblock %}
